@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <style type="text/css">
+      /* body {
+        background-color: black;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      h1 {
+        color: white;
+      }
+      a {
+        color: white;
+      }
+      li {
+        color: white;
+      } */
+    </style>
+  </head>
+  <body>
+           <%- include('partials/header.ejs'); %>
+                             <%- include('partials/navbar.ejs'); %>
+  <br />
+
+    <h3>email address:</h3>
+    <form action="/submitEmail" method="post">
+      <input name="email" type="text" placeholder="email" />
+      <button class="btn btn-info">Submit</button>
+    </form>
+
+    <% if (missingEmail) { %>
+    <br />
+    email is required <% } %>
+    
+         <%- include('partials/footer.ejs'); %>
+
+  </body>
+</html>

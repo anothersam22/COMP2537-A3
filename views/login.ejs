@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <style type="text/css">
+      /* body {
+        background-color: black;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      h1 {
+        color: white;
+      }
+      a {
+        color: white;
+      }
+      li {
+        color: white;
+      } */
+    </style>
+  </head>
+  <body>
+           <%- include('partials/header.ejs'); %>
+                             <%- include('partials/navbar.ejs'); %>
+  <br />
+
+    <h3>log in</h3>
+    <form action="/loggingin" method="post">
+      <input name="username" type="text" placeholder="username" />
+      <input name="password" type="password" placeholder="password" />
+      <button class="btn btn-info">Submit</button>
+    </form>
+         <%- include('partials/footer.ejs'); %>
+
+  </body>
+</html>
