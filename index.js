@@ -56,15 +56,6 @@ app.use(
   })
 );
 
-// // add isAdmin boolean to every user
-// async function addUserType() {
-//   const result = await userCollection.updateMany(
-//     {},
-//     { $set: { isAdmin: false } }
-//   );
-//   console.log(`${result.modifiedCount} users updated with isAdmin field`);
-// }
-// addUserType();
 
 // function to change isAdmin to true for a specific user
 async function promoteUser(username) {
@@ -350,36 +341,6 @@ function getRandomFiles(files, count) {
   const shuffled = files.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
-
-// async func to put image into /public/memberImages folder
-async function uploadImage(image, userID) {
-  await userCollection.updateOne({ _id: userID }, { $push: { images: image } });
-  console.log("Image added to user");
-}
-
-// membersUpload page with EJS
-app.get("/membersUpload", (req, res) => {
-  if (!req.session.username) {
-    res.redirect("/login");
-    return;
-  }
-  res.render("membersUpload", {
-    username: req.session.username,
-    userID: req.session._id,
-  });
-});
-
-// members upload page with EJS
-app.post("/upload", async (req, res) => {
-  if (!req.session.username) {
-    res.redirect("/login");
-    return;
-  }
-  var userID = req.session._id;
-  var image = req.body.image;
-  await uploadImage(image, userID);
-  res.redirect("/members");
-});
 
 // promoteUser route working
 app.post("/promoteUser", async (req, res) => {
