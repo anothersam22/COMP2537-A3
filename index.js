@@ -1,18 +1,5 @@
-const PAGE_SIZE = 10;
-let currentPage = 1;
-// let pokemons = [];
 
-// const updatePaginationDiv = (currentPage, numPages) => {
-//   $("#pagination").empty();
 
-//   const startPage = 1;
-//   const endPage = numPages;
-//   for (let i = startPage; i <= endPage; i++) {
-//     $("#pagination").append(`
-//     <button class="btn btn-primary page ml-1 numberedButtons" value="${i}">${i}</button>
-//     `);
-//   }
-// };
 
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   const startIndex = (currentPage - 1) * PAGE_SIZE;
@@ -124,10 +111,29 @@ const displayedPokemons = async () => {
       url: item.url,
     }));
   }
-  // currentPage = 1;
 };
 
 const setup = async () => {
+  // Connect to Pokémon API and display checkboxes
+  try {
+    const response = await axios.get("https://pokeapi.co/api/v2/type");
+    const types = response.data.results;
+
+    const checkboxes = types.map((type) => {
+      const checkboxId = `${type.name}Checkbox`;
+      return `
+      <label for="${checkboxId}">
+        <input type="checkbox" id="${checkboxId}" value="${type.url
+        .split("/")
+        .slice(-2, -1)}">${type.name}
+      </label>
+    `;
+    });
+
+    $("#pokeTypesFilter").html(checkboxes.join(""));
+  } catch (error) {
+    console.log("Error fetching Pokémon types:", error);
+  }
 
   $("#pokeCards").empty();
   currentPage = 1;
@@ -187,8 +193,6 @@ const setup = async () => {
   $("body").on("click", ".numberedButtons", async function (e) {
     currentPage = Number(e.target.value);
     paginate(currentPage, PAGE_SIZE, pokemons);
-
-  
   });
 
   // add event listener for checkboxes
@@ -196,9 +200,9 @@ const setup = async () => {
     "click",
     "#pokeTypesFilter input[type='checkbox']",
     async function (e) {
-     // currentPage = Number(e.target.value);
-        currentPage = 1;
-        const PAGE_SIZE = 10;
+      // currentPage = Number(e.target.value);
+      currentPage = 1;
+      const PAGE_SIZE = 10;
       await displayedPokemons();
 
       // await setup();

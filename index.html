@@ -1,126 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokeDex</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PokeDex</title>
+    <!-- import axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- import axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- bootstrap imports -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- bootstrap imports -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
 
+    <!-- my files imports -->
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <body>
+    <h1>Pokedex</h1>
 
-  <!-- my files imports -->
-  <script src="index.js"></script>
-  <link rel="stylesheet" href="index.css">
-</head>
+    <div id="pokeTypesFilter"></div>
+    <div id="displayCount"></div>
 
-<body>
-  <h1>Pokedex</h1>
- 
-      <div id="pokeTypesFilter">
-    <label for="normalCheckbox">
-      <input type="checkbox" id="normalCheckbox" value="1"> Normal
-    </label>
-    <label for="fightingCheckbox">
-      <input type="checkbox" id="fightingCheckbox" value="2"> Fighting
-    </label>
-    <label for="flyingCheckbox">
-      <input type="checkbox" id="flyingCheckbox" value="3"> Flying
-    </label>
-    <label for="poisonCheckbox">
-      <input type="checkbox" id="poisonCheckbox" value="4"> Poison
-    </label>
-    <label for="groundCheckbox">
-      <input type="checkbox" id="groundCheckbox" value="5"> Ground
-    </label>
-    <label for="rockCheckbox">
-      <input type="checkbox" id="rockCheckbox" value="6"> Rock
-    </label>
-    <label for="bugCheckbox">
-      <input type="checkbox" id="bugCheckbox" value="7"> Bug
-    </label>
-    <label for="ghostCheckbox">
-      <input type="checkbox" id="ghostCheckbox" value="8"> Ghost
-    </label>
-    <label for="steelCheckbox">
-      <input type="checkbox" id="steelCheckbox" value="9"> Steel
-    </label>
-    <label for="fireCheckbox">
-      <input type="checkbox" id="fireCheckbox" value="10"> Fire
-    </label>
-    <label for="waterCheckbox">
-      <input type="checkbox" id="waterCheckbox" value="11"> Water
-    </label>
-    <label for="grassCheckbox">
-      <input type="checkbox" id="grassCheckbox" value="12"> Grass
-    </label>
-    <label for="electricCheckbox">
-      <input type="checkbox" id="electricCheckbox" value="13"> Electric
-    </label>
-    <label for="psychicCheckbox">
-      <input type="checkbox" id="psychicCheckbox" value="14"> Psychic
-    </label>
-    <label for="iceCheckbox">
-      <input type="checkbox" id="iceCheckbox" value="15"> Ice
-    </label>
-    <label for="dragonCheckbox">
-      <input type="checkbox" id="dragonCheckbox" value="16"> Dragon
-    </label>
-    <label for="darkCheckbox">
-      <input type="checkbox" id="darkCheckbox" value="17"> Dark
-    </label>
-    <label for="fairyCheckbox">
-      <input type="checkbox" id="fairyCheckbox" value="18"> Fairy
-    </label>
-    <label for="unknownCheckbox">
-      <input type="checkbox" id="unknownCheckbox" value="10001"> Unknown
-    </label>
-    <label for="shadowCheckbox">
-      <input type="checkbox" id="shadowCheckbox" value="10002"> Shadow
-    </label>
-  </div>
-   <div id="displayCount"></div>
+    <div id="pokeCards"></div>
 
-
-  <div id="pokeCards"></div>
-
-  <div id="pokeModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <div id="pokeModal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
 
     <div id="pagination"></div>
-</body>
-
+  </body>
 </html>
